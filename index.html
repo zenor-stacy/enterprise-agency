@@ -657,22 +657,22 @@
                         <input type="number" id="admin-ratio" value="20" min="5" max="50">
                     </div>
                     <div class="input-group">
-                        <label>平均月薪 (¥)</label>
+                        <label>平均月薪 (NT$)</label>
                         <input type="number" id="salary" value="8000" min="3000" max="20000">
                     </div>
                 </div>
                 <div class="roi-results">
                     <div class="roi-result-item">
                         <div class="label">年度人力成本節省</div>
-                        <div class="value" id="savings">¥192,000</div>
+                        <div class="value" id="savings">NT$192,000</div>v>
                     </div>
                     <div class="roi-result-item">
                         <div class="label">投資回本期</div>
                         <div class="value" id="payback">8 個月</div>
                     </div>
                     <div class="roi-result-item">
-                        <div class="label">3 年累計節省</div>
-                        <div class="value" id="total-savings">¥576,000</div>
+                        <div class="label">33 年累計節省</div>
+                        <div class="value" id="total-savings">NT$576,000</div>>
                     </div>
                 </div>
             </div>
@@ -687,7 +687,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>基礎版</h3>
-                    <div class="price">¥88,000</div>
+                    <div class="price">NT$88,000</div>
                     <div class="price-period">一次性投資</div>
                     <ul>
                         <li>Mac mini M2</li>
@@ -700,7 +700,7 @@
                 </div>
                 <div class="pricing-card featured">
                     <h3>⭐ 標準版</h3>
-                    <div class="price">¥128,000</div>
+                    <div class="price">NT$128,000</div>
                     <div class="price-period">一次性投資</div>
                     <ul>
                         <li>Mac mini M3</li>
@@ -714,7 +714,7 @@
                 </div>
                 <div class="pricing-card">
                     <h3>企業版</h3>
-                    <div class="price">¥188,000</div>
+                    <div class="price">NT$188,000</div>
                     <div class="price-period">一次性投資</div>
                     <ul>
                         <li>Mac mini M3 Pro</li>
@@ -768,13 +768,13 @@
             const yearlySavings = monthlySavings * 12;
 
             // 投資成本（取標準版價格）
-            const investmentCost = 128000;
+            const investmentCost = 128000; // NT$
             const paybackMonths = Math.ceil(investmentCost / monthlySavings);
             const totalSavings3Years = yearlySavings * 3 - investmentCost;
 
-            savingsDisplay.textContent = '¥' + yearlySavings.toLocaleString();
+            savingsDisplay.textContent = 'NT$' + yearlySavings.toLocaleString();
             paybackDisplay.textContent = paybackMonths + ' 個月';
-            totalSavingsDisplay.textContent = '¥' + totalSavings3Years.toLocaleString();
+            totalSavingsDisplay.textContent = 'NT$' + totalSavings3Years.toLocaleString();
         }
 
         employeesInput.addEventListener('input', calculateROI);
