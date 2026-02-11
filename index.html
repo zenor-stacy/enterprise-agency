@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="企業 AI 數位員工系統 - 本地部署、數據安全、24/7 不間斷運行的企業級 AI 助手解決方案">
+    <meta name="keywords" content="AI 數位員工, 企業自動化, 本地部署, 數據安全, 製造業數位轉型">
+    <title>企業 AI 數位員工系統 - 您的企業 AI 助手已就位</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e3a8a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        section .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Value Proposition */
+        .values {
+            background-color: var(--bg-light);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .feature-box:hover {
+            background: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-box p {
+            color: var(--text-light);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background-color: var(--bg-light);
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .use-case-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .use-case-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .use-case-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .use-case-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .use-case-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* ROI Calculator */
+        .roi-calculator {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .roi-calculator h2 {
+            color: white;
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .calculator-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .roi-results {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .roi-result-item {
+            text-align: center;
+        }
+
+        .roi-result-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-result-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background-color: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price-period {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .pricing-card .btn-primary {
+            width: 100%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">企業 AI 助手</div>
+                <ul>
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#use-cases">應用場景</a></li>
+                    <li><a href="#pricing">定價</a></li>
+                </ul>
+                <button class="cta-button">申請演示</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>您的企業 AI 助手已就位</h1>
+            <p>本地部署、數據完全掌控、24/7 不間斷運行<br>為您的企業帶來行政、設計、開發的全方位智能支持</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">立即訂購</button>
+                <button class="btn-secondary">了解更多</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="values">
+        <div class="container">
+            <h2>為什麼選擇我們</h2>
+            <p class="subtitle">企業級 AI 解決方案，專為製造業中小企業設計</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>🔒 數據安全</h3>
+                    <p>所有數據保存在企業本地，無需上傳雲端，完全掌控敏感信息，符合企業合規要求。</p>
+                </div>
+                <div class="value-card">
+                    <h3>⚡ 24/7 運行</h3>
+                    <p>專業硬件配置，穩定高效運行，無需人工干預，隨時為您的團隊提供智能支持。</p>
+                </div>
+                <div class="value-card">
+                    <h3>💼 企業級支持</h3>
+                    <p>專業技術團隊全程支持，快速響應，確保系統穩定運行，讓您專注於業務發展。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>核心功能</h2>
+            <p class="subtitle">三大應用場景，全面提升企業效率</p>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">📋</div>
+                    <h3>行政自動化</h3>
+                    <p>自動處理文檔、郵件、日程安排等日常行政工作，減少人工操作，提高工作效率。</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🎨</div>
+                    <h3>設計輔助</h3>
+                    <p>智能輔助設計工作，生成創意方案，加速設計流程，提升設計質量。</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">💻</div>
+                    <h3>代碼生成</h3>
+                    <p>自動生成代碼片段，加速開發流程，減少編碼錯誤，提高開發效率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <h2>應用場景</h2>
+            <p class="subtitle">針對製造業中小企業的實際需求</p>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <h3>生產管理</h3>
+                    <ul>
+                        <li>自動生成生產計劃報告</li>
+                        <li>實時監控生產進度</li>
+                        <li>智能異常預警</li>
+                        <li>自動化數據統計</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>質量控制</h3>
+                    <ul>
+                        <li>檢驗數據自動分析</li>
+                        <li>質量報告自動生成</li>
+                        <li>不合格品智能追蹤</li>
+                        <li>改進建議自動提出</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>供應鏈管理</h3>
+                    <ul>
+                        <li>採購單據自動處理</li>
+                        <li>庫存智能預測</li>
+                        <li>供應商信息管理</li>
+                        <li>成本分析自動化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="roi-calculator">
+        <div class="container">
+            <h2>投資回報計算</h2>
+            <p class="subtitle">看看您能節省多少成本</p>
+            <div class="calculator-container">
+                <div class="calculator-input">
+                    <div class="input-group">
+                        <label>企業員工數</label>
+                        <input type="number" id="employees" value="100" min="10" max="1000">
+                    </div>
+                    <div class="input-group">
+                        <label>行政人員比例 (%)</label>
+                        <input type="number" id="admin-ratio" value="20" min="5" max="50">
+                    </div>
+                    <div class="input-group">
+                        <label>平均月薪 (¥)</label>
+                        <input type="number" id="salary" value="8000" min="3000" max="20000">
+                    </div>
+                </div>
+                <div class="roi-results">
+                    <div class="roi-result-item">
+                        <div class="label">年度人力成本節省</div>
+                        <div class="value" id="savings">¥192,000</div>
+                    </div>
+                    <div class="roi-result-item">
+                        <div class="label">投資回本期</div>
+                        <div class="value" id="payback">8 個月</div>
+                    </div>
+                    <div class="roi-result-item">
+                        <div class="label">3 年累計節省</div>
+                        <div class="value" id="total-savings">¥576,000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>定價方案</h2>
+            <p class="subtitle">選擇最適合您企業的方案</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>基礎版</h3>
+                    <div class="price">¥88,000</div>
+                    <div class="price-period">一次性投資</div>
+                    <ul>
+                        <li>Mac mini M2</li>
+                        <li>本地 AI 系統</li>
+                        <li>3 個 AI Agent</li>
+                        <li>基礎支持（1 個月）</li>
+                        <li>遠程部署服務</li>
+                    </ul>
+                    <button class="btn-primary">選擇方案</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>⭐ 標準版</h3>
+                    <div class="price">¥128,000</div>
+                    <div class="price-period">一次性投資</div>
+                    <ul>
+                        <li>Mac mini M3</li>
+                        <li>本地 AI 系統</li>
+                        <li>7 個 AI Agent</li>
+                        <li>優先支持（3 個月）</li>
+                        <li>遠程部署 + 現場培訓</li>
+                        <li>定期維護更新</li>
+                    </ul>
+                    <button class="btn-primary">選擇方案</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>企業版</h3>
+                    <div class="price">¥188,000</div>
+                    <div class="price-period">一次性投資</div>
+                    <ul>
+                        <li>Mac mini M3 Pro</li>
+                        <li>本地 AI 系統</li>
+                        <li>無限 AI Agent</li>
+                        <li>企業級支持（12 個月）</li>
+                        <li>現場部署 + 深度培訓</li>
+                        <li>定制化開發支持</li>
+                    </ul>
+                    <button class="btn-primary">選擇方案</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>準備好升級您的企業了嗎？</h2>
+            <p>立即申請演示，體驗企業 AI 助手的強大功能</p>
+            <button class="btn-primary">申請免費演示</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 企業 AI 數位員工系統。保留所有權利。</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">專為製造業中小企業設計 | 本地部署 | 數據安全 | 24/7 支持</p>
+        </div>
+    </footer>
+
+    <script>
+        // ROI Calculator
+        const employeesInput = document.getElementById('employees');
+        const adminRatioInput = document.getElementById('admin-ratio');
+        const salaryInput = document.getElementById('salary');
+        const savingsDisplay = document.getElementById('savings');
+        const paybackDisplay = document.getElementById('payback');
+        const totalSavingsDisplay = document.getElementById('total-savings');
+
+        function calculateROI() {
+            const employees = parseInt(employeesInput.value);
+            const adminRatio = parseInt(adminRatioInput.value) / 100;
+            const salary = parseInt(salaryInput.value);
+
+            // 假設 AI 系統可以替代 30% 的行政工作
+            const adminEmployees = employees * adminRatio;
+            const automatedEmployees = adminEmployees * 0.3;
+            const monthlySavings = automatedEmployees * salary;
+            const yearlySavings = monthlySavings * 12;
+
+            // 投資成本（取標準版價格）
+            const investmentCost = 128000;
+            const paybackMonths = Math.ceil(investmentCost / monthlySavings);
+            const totalSavings3Years = yearlySavings * 3 - investmentCost;
+
+            savingsDisplay.textContent = '¥' + yearlySavings.toLocaleString();
+            paybackDisplay.textContent = paybackMonths + ' 個月';
+            totalSavingsDisplay.textContent = '¥' + totalSavings3Years.toLocaleString();
+        }
+
+        employeesInput.addEventListener('input', calculateROI);
+        adminRatioInput.addEventListener('input', calculateROI);
+        salaryInput.addEventListener('input', calculateROI);
+
+        // 初始計算
+        calculateROI();
+
+        // 按鈕事件
+        document.querySelectorAll('.btn-primary, .cta-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('感謝您的興趣！請填寫表單以申請演示。\n\n聯繫我們：sales@enterprise-ai.com');
+            });
+        });
+    </script>
+</body>
+</html>
